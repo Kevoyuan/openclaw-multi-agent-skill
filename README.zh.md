@@ -41,7 +41,7 @@
 优先使用 skills 安装器直接安装：
 
 ```bash
-npx skills install <你的仓库地址>
+npx skills install https://github.com/Kevoyuan/openclaw-multi-agent-skill
 ```
 
 如果你使用的是内部 registry 或本地封装命令，就按你当前环境对应的 `npx skills ...` 用法安装。
@@ -51,7 +51,7 @@ npx skills install <你的仓库地址>
 直接把仓库克隆到 skills 目录：
 
 ```bash
-git clone <你的仓库地址> ~/.codex/skills/claw-agents
+git clone https://github.com/Kevoyuan/openclaw-multi-agent-skill ~/.codex/skills/claw-agents
 ```
 
 如果你的 OpenClaw 安装使用的是其他 skills 路径，就克隆到对应位置。
@@ -61,7 +61,7 @@ git clone <你的仓库地址> ~/.codex/skills/claw-agents
 如果你想把仓库放在别处做开发：
 
 ```bash
-git clone <你的仓库地址> ~/code/openclaw-multi-agent-skill
+git clone https://github.com/Kevoyuan/openclaw-multi-agent-skill ~/code/openclaw-multi-agent-skill
 mkdir -p ~/.codex/skills
 ln -s ~/code/openclaw-multi-agent-skill/claw-agents ~/.codex/skills/claw-agents
 ```

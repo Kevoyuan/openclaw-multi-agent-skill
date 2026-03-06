@@ -41,7 +41,7 @@ Install this skill into the OpenClaw or Codex skills directory you use locally.
 Install directly with the skills installer:
 
 ```bash
-npx skills install <your-repo-url>
+npx skills install https://github.com/Kevoyuan/openclaw-multi-agent-skill
 ```
 
 If you use a curated registry or a local shortcut, use the matching `npx skills ...` command for your environment.
@@ -51,7 +51,7 @@ If you use a curated registry or a local shortcut, use the matching `npx skills 
 Clone the repo directly into your skills directory:
 
 ```bash
-git clone <your-repo-url> ~/.codex/skills/claw-agents
+git clone https://github.com/Kevoyuan/openclaw-multi-agent-skill ~/.codex/skills/claw-agents
 ```
 
 If your OpenClaw installation uses another skills path, clone it there instead.
@@ -61,7 +61,7 @@ If your OpenClaw installation uses another skills path, clone it there instead.
 If you prefer to keep the repo elsewhere for development:
 
 ```bash
-git clone <your-repo-url> ~/code/openclaw-multi-agent-skill
+git clone https://github.com/Kevoyuan/openclaw-multi-agent-skill ~/code/openclaw-multi-agent-skill
 mkdir -p ~/.codex/skills
 ln -s ~/code/openclaw-multi-agent-skill/claw-agents ~/.codex/skills/claw-agents
 ```
