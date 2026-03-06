@@ -15,6 +15,7 @@ if claw_is_zh; then
   AGENT_COUNT_LABEL="需要几个智能体"
   TOOLS_LABEL="工具权限预设"
   SANDBOX_LABEL="沙箱预设"
+  MEMORY_LABEL="启用跨对话记忆（session-memory hook）"
   CUSTOM_ALLOW_LABEL="allow 列表（逗号分隔，留空表示不写）"
   CUSTOM_DENY_LABEL="deny 列表（逗号分隔，留空表示不写）"
   AGENT_ID_LABEL="agent ID"
@@ -40,6 +41,7 @@ else
   AGENT_COUNT_LABEL="How many agents do you need"
   TOOLS_LABEL="Tools preset"
   SANDBOX_LABEL="Sandbox preset"
+  MEMORY_LABEL="Enable cross-conversation memory (session-memory hook)"
   CUSTOM_ALLOW_LABEL="allow list (comma-separated, blank to skip)"
   CUSTOM_DENY_LABEL="deny list (comma-separated, blank to skip)"
   AGENT_ID_LABEL="agent ID"
@@ -168,6 +170,12 @@ SANDBOX_PRESET=$(prompt_select \
   "$SANDBOX_LABEL" \
   "off:$SANDBOX_OFF_OPTION" \
   "all:$SANDBOX_ALL_OPTION")
+
+if prompt_yes_no "$MEMORY_LABEL" "n"; then
+  MEMORY_HOOKS_JSON='{"internal":{"entries":{"session-memory":{"enabled":true}}}}'
+else
+  MEMORY_HOOKS_JSON='{}'
+fi
 
 CUSTOM_ALLOW=""
 CUSTOM_DENY=""
@@ -359,12 +367,12 @@ fi
 ACCOUNTS_CSV=$(IFS=,; echo "${ACCOUNT_IDS[*]}")
 ACCOUNT_NAMES_JSON=$(json_names_map_from_pairs "${ACCOUNT_NAME_PAIRS[@]}")
 
-python3 - "$CONFIG_FILE" "$AGENTS_JSON" "$BINDINGS_JSON" "$CHANNELS_JSON" <<'PY'
+python3 - "$CONFIG_FILE" "$AGENTS_JSON" "$BINDINGS_JSON" "$CHANNELS_JSON" "$MEMORY_HOOKS_JSON" <<'PY'
 import json
 import os
 import sys
 
-config_file, agents_json, bindings_json, channels_json = sys.argv[1:]
+config_file, agents_json, bindings_json, channels_json, hooks_json = sys.argv[1:]
 config = {
     "agents": {"list": json.loads(agents_json)},
     "bindings": json.loads(bindings_json),
@@ -372,6 +380,9 @@ config = {
 channels = json.loads(channels_json)
 if channels:
     config["channels"] = channels
+hooks = json.loads(hooks_json)
+if hooks:
+    config["hooks"] = hooks
 
 os.makedirs(os.path.dirname(config_file), exist_ok=True)
 with open(config_file, "w", encoding="utf-8") as fh:

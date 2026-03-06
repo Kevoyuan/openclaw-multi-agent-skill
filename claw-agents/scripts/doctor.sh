@@ -188,6 +188,18 @@ if whatsapp and whatsapp.get("dmPolicy") == "allowlist":
     else:
         warn("WhatsApp dmPolicy=allowlist but allowFrom is empty" if not is_zh else "WhatsApp dmPolicy=allowlist 但 allowFrom 为空")
 
+hooks = config.get("hooks", {})
+session_memory_enabled = (
+    hooks.get("internal", {})
+    .get("entries", {})
+    .get("session-memory", {})
+    .get("enabled")
+)
+if session_memory_enabled:
+    ok("session-memory hook enabled" if not is_zh else "session-memory hook 已启用")
+else:
+    warn("session-memory hook is not enabled" if not is_zh else "session-memory hook 未启用")
+
 print("")
 print("=== Summary ===" if not is_zh else "=== 汇总 ===")
 if issues == 0:

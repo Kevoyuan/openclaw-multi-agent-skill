@@ -49,6 +49,7 @@ if claw_is_zh; then
   BY_TEAM_OPTION="按 teamId（Slack）"
   BY_GUILD_OPTION="按 guildId（Discord）"
   WHOLE_CHANNEL_OPTION="整个渠道"
+  MEMORY_LABEL="如果缺少配置，启用跨对话记忆（session-memory hook）"
 else
   NEW_AGENT_LABEL="new agent ID"
   DISPLAY_NAME_LABEL="display name"
@@ -78,6 +79,7 @@ else
   BY_TEAM_OPTION="By teamId (Slack)"
   BY_GUILD_OPTION="By guildId (Discord)"
   WHOLE_CHANNEL_OPTION="Entire channel"
+  MEMORY_LABEL="Enable cross-conversation memory if it is not configured yet"
 fi
 
 CLI_AGENT_ID="${1:-}"
@@ -136,6 +138,7 @@ PY
 
 PROVISION_ACCOUNT="default"
 PROVISION_NAME="$AGENT_NAME"
+ENABLE_MEMORY="false"
 
 case "$BINDING_MODE" in
   account)
@@ -242,6 +245,35 @@ with open(config_file, "w", encoding="utf-8") as fh:
     json.dump(config, fh, ensure_ascii=False, indent=2)
     fh.write("\n")
 PY
+
+if python3 - "$CONFIG_FILE" <<'PY'
+import json, sys
+with open(sys.argv[1], "r", encoding="utf-8") as fh:
+    config = json.load(fh)
+enabled = (
+    config.get("hooks", {})
+    .get("internal", {})
+    .get("entries", {})
+    .get("session-memory", {})
+    .get("enabled")
+)
+raise SystemExit(0 if enabled else 1)
+PY
+then
+  :
+else
+  if prompt_yes_no "$MEMORY_LABEL" "n"; then
+    python3 - "$CONFIG_FILE" <<'PY'
+import json, sys
+with open(sys.argv[1], "r", encoding="utf-8") as fh:
+    config = json.load(fh)
+config.setdefault("hooks", {}).setdefault("internal", {}).setdefault("entries", {})["session-memory"] = {"enabled": True}
+with open(sys.argv[1], "w", encoding="utf-8") as fh:
+    json.dump(config, fh, ensure_ascii=False, indent=2)
+    fh.write("\n")
+PY
+  fi
+fi
 
 if claw_is_zh; then
   echo "$ADDED_PREFIX '$AGENT_ID'。"

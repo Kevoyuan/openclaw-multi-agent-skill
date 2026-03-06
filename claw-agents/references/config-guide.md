@@ -67,7 +67,16 @@
       "agentId": "coding",
       "match": { "channel": "telegram", "accountId": "coding" }
     }
-  ]
+  ],
+  "hooks": {
+    "internal": {
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -244,3 +253,9 @@ per-agent 工具权限和沙箱放在每个 agent 对象里，不是放在 `agen
 - 执行 `openclaw gateway restart`
 - 再执行 `openclaw agents list --bindings`
 - 再执行 `openclaw channels status --probe`
+
+### 跨对话记忆没生效
+
+- 检查 `hooks.internal.entries.session-memory.enabled` 是否为 `true`
+- 执行 `openclaw gateway restart`
+- 执行 `openclaw logs | grep -i memory`

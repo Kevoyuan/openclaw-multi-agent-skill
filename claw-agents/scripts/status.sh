@@ -106,4 +106,10 @@ if channels:
     print("")
     print("=== Channel Config ===" if not is_zh else "=== 渠道级配置 ===")
     print(json.dumps(channels, ensure_ascii=False, indent=2))
+
+hooks = config.get("hooks")
+if hooks:
+    print("")
+    print("=== Hooks ===")
+    print(json.dumps(hooks, ensure_ascii=False, indent=2))
 PY
