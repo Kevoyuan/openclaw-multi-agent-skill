@@ -46,6 +46,20 @@ npx skills install https://github.com/Kevoyuan/openclaw-multi-agent-skill
 
 If you use a curated registry or a local shortcut, use the matching `npx skills ...` command for your environment.
 
+### Install script
+
+This repo also includes a local installer:
+
+```bash
+bash claw-agents/scripts/install-codex.sh
+```
+
+To install as a symlink instead of copying:
+
+```bash
+bash claw-agents/scripts/install-codex.sh --link
+```
+
 ### Git clone
 
 Clone the repo directly into your skills directory:
@@ -139,9 +153,12 @@ openclaw gateway restart
 ## Project Structure
 
 - [SKILL.md](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/SKILL.md): OpenClaw-facing skill behavior
+- [install-codex.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/install-codex.sh): local installer for Codex skills
 - [config-guide.md](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/references/config-guide.md): official-model reference and config patterns
 - [openclaw-agents.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/openclaw-agents.sh): unified wrapper
 - [setup.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/setup.sh): initial config creation
 - [add.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/add.sh): append one agent
 - [doctor.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/doctor.sh): isolation and binding checks
 - [provision.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/provision.sh): official channel provisioning and probe wrapper
+- [config.env.example](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/config.env.example): environment override examples
+- [SECURITY.md](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/SECURITY.md): security notes and local-state model

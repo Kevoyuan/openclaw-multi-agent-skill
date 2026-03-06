@@ -46,6 +46,20 @@ npx skills install https://github.com/Kevoyuan/openclaw-multi-agent-skill
 
 如果你使用的是内部 registry 或本地封装命令，就按你当前环境对应的 `npx skills ...` 用法安装。
 
+### 安装脚本
+
+这个仓库也自带一个本地安装脚本：
+
+```bash
+bash claw-agents/scripts/install-codex.sh
+```
+
+如果你想用软链接而不是复制：
+
+```bash
+bash claw-agents/scripts/install-codex.sh --link
+```
+
 ### Git clone
 
 直接把仓库克隆到 skills 目录：
@@ -139,9 +153,12 @@ openclaw gateway restart
 ## 项目结构
 
 - [SKILL.md](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/SKILL.md)：面向 OpenClaw 的 skill 定义
+- [install-codex.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/install-codex.sh)：本地 Codex 安装脚本
 - [config-guide.md](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/references/config-guide.md)：官方模型参考和配置模式
 - [openclaw-agents.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/openclaw-agents.sh)：统一入口
 - [setup.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/setup.sh)：首次配置创建
 - [add.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/add.sh)：追加单个 agent
 - [doctor.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/doctor.sh)：隔离和绑定检查
 - [provision.sh](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/claw-agents/scripts/provision.sh)：官方渠道 provisioning 和 probe 封装
+- [config.env.example](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/config.env.example)：环境变量覆盖示例
+- [SECURITY.md](/Volumes/SSD/Projects/Code/openclaw-multi-agent-skill/SECURITY.md)：安全说明和本地状态模型
