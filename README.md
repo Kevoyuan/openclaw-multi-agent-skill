@@ -2,6 +2,8 @@
 
 [中文说明 / Chinese README](./README.zh.md)
 
+> 🤖 One-click setup for multi-agent workspaces in OpenClaw. Automates workspace isolation, agent bindings, and configuration.
+
 ## Overview
 
 This repository packages an OpenClaw-native multi-agent setup flow around four commands:

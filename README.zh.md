@@ -2,6 +2,8 @@
 
 [English README](./README.md)
 
+> 🤖 一键配置 OpenClaw 多智能体工作环境。自动化创建隔离的工作空间、管理 Agent 绑定和配置文件。
+
 ## 简介
 
 这个仓库把 OpenClaw 多智能体配置收敛成 4 个原生命令：
